@@ -18,11 +18,38 @@ complex. That is what this plugin takes care of (+ lots of other neat stuff)!
 Nested sets are a good choice for most kinds of ordered trees with more than
 two levels of nesting. Very good for menus, categories, and threaded posts.
 
+
 == Installation
 
-Download and install the latest dm-more-gem. Remember to require it!
+=== Stable
+
+Install the <tt>dm-is-nested_set</tt> gem.
+
+  $ (sudo)? gem install dm-is-nested_set
+
+=== Edge
+
+Download or clone <tt>dm-is-nested_set</tt> from Github[http://github.com/datamapper/dm-is-nested_set/].
+
+  $ cd /path/to/dm-is-nested_set
+
+  $ rake install            # will install dm-is-nested_set
+  
 
 == Getting started
+
+To start using this gem, just:
+
+  require 'dm-is-nested_set' 
+
+
+  class Category
+    <snip...>
+    
+    is :nested_set
+    
+  end
+
 
 Coming
 
@@ -50,19 +77,19 @@ We have a nested menu of categories. The categories are as follows:
 
 In a nested set, each of these categories would have 'left' and 'right' fields,
 informing about where in the set they are positioned. This can be illustrated:
- _____________________________________________________________________________
-|   _________________________________    __________________________________   |
-|  |   ______    _____    ________   |  |   _______________    _________   |  |
-|  |  |      |  |     |  |        |  |  |  |               |  |         |  |  |
-1  2  3      4  5     6  7        8  9  10 11             12  13  CD-  14 15 16
-|  |  | Tube |  | LCD |  | Plasma |  |  |  |  MP3 Players  |  | Players |  |  |
-|  |  |______|  |_____|  |________|  |  |  |_______________|  |_________|  |  |
-|  |                                 |  |                                  |  |
-|  |          Televisions            |  |       Portable Electronics       |  |
-|  |_________________________________|  |__________________________________|  |
-|                                                                             |
-|                                 Electronics                                 |
-|_____________________________________________________________________________|
+   _____________________________________________________________________________
+  |   _________________________________    __________________________________   |
+  |  |   ______    _____    ________   |  |   _______________    _________   |  |
+  |  |  |      |  |     |  |        |  |  |  |               |  |         |  |  |
+  1  2  3      4  5     6  7        8  9  10 11             12  13  CD-  14 15 16
+  |  |  | Tube |  | LCD |  | Plasma |  |  |  |  MP3 Players  |  | Players |  |  |
+  |  |  |______|  |_____|  |________|  |  |  |_______________|  |_________|  |  |
+  |  |                                 |  |                                  |  |
+  |  |          Televisions            |  |       Portable Electronics       |  |
+  |  |_________________________________|  |__________________________________|  |
+  |                                                                             |
+  |                                 Electronics                                 |
+  |_____________________________________________________________________________|
 
 All sets has a left / right value, that just says 'here do I start', and 'here
 do I end'. The category 'Televisions' starts at 2, and ends at 9. We then know
@@ -72,23 +99,56 @@ left and right value has a gap between them. Clever huh?
 
 Now, if we want to insert the category 'Flash' into 'MP3 Players', the new set
 and left/right values would now be:
- _____________________________________________________________________________
-|                                        __________________________________   |
-|   _________________________________   |   _______________                |  |
-|  |   ______    _____    ________   |  |  |   _________   |   _________   |  |
-|  |  |      |  |     |  |        |  |  |  |  |         |  |  |         |  |  |
-1  2  3      4  5     6  7        8  9  10 11 12 Flash 13 14  15  CD-  16 17 18
-|  |  | Tube |  | LCD |  | Plasma |  |  |  |  |_________|  |  | Players |  |  |
-|  |  |______|  |_____|  |________|  |  |  |               |  |_________|  |  |
-|  |                                 |  |  |  MP3 Players  |               |  |
-|  |          Televisions            |  |  |_______________|  Portable El. |  |
-|  |_________________________________|  |__________________________________|  |
-|                                                                             |
-|                                 Electronics                                 |
-|_____________________________________________________________________________|
+   _____________________________________________________________________________
+  |                                        __________________________________   |
+  |   _________________________________   |   _______________                |  |
+  |  |   ______    _____    ________   |  |  |   _________   |   _________   |  |
+  |  |  |      |  |     |  |        |  |  |  |  |         |  |  |         |  |  |
+  1  2  3      4  5     6  7        8  9  10 11 12 Flash 13 14  15  CD-  16 17 18
+  |  |  | Tube |  | LCD |  | Plasma |  |  |  |  |_________|  |  | Players |  |  |
+  |  |  |______|  |_____|  |________|  |  |  |               |  |_________|  |  |
+  |  |                                 |  |  |  MP3 Players  |               |  |
+  |  |          Televisions            |  |  |_______________|  Portable El. |  |
+  |  |_________________________________|  |__________________________________|  |
+  |                                                                             |
+  |                                 Electronics                                 |
+  |_____________________________________________________________________________|
 
 == More about nested sets
 
 * http://www.developersdex.com/gurus/articles/112.asp
 * http://dev.mysql.com/tech-resources/articles/hierarchical-data.html
 * http://www.codeproject.com/KB/database/nestedsets.aspx (nice illustrations)
+
+
+== Errors / Bugs
+
+If something is not behaving intuitively, it is a bug, and should be reported.
+Report it here: http://datamapper.lighthouseapp.com/
+
+
+== TODOs
+
+* Improve this README.
+* Anything else missing?
+
+
+== Note on Patches/Pull Requests
+
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so we don't break it in a future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  * (if you want to have your own version, that is fine but bump version in a commit by itself we can ignore when we pull)
+* Send us a pull request. Bonus points for topic branches.
+
+
+== Copyright
+
+Copyright (c) 2010 Sindre Aarsaether. Released under the MIT License.
+
+See LICENSE for details.
+
+=== Credits
+
+Credit also goes to these contributors[http://github.com/datamapper/dm-is-nested_set/contributors].
